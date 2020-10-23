@@ -36,7 +36,7 @@ class apodBot:  # TODO Block args from passing mentions
             command_prefix='!apod ',  # TODO Find a way to include trailing spaces from ConfigParser('config.ini')
             # command_prefix=self.config['COMMAND']['call_string'],
             description="Astronomy Picture of the Day Bot",
-            owner_id=132679831337959425,
+            owner_id=self.config['CLIENT']['owner_id'],
             case_insensitive=True  # TODO Figure out if this actually works
         )
         self.cogs = [i[:-3] for i in listdir(cogs_directory) if i.endswith('.py')]  # Sets cogs directory
