@@ -30,6 +30,7 @@ class apodBot:  # TODO Block args from passing mentions
         except ImportError:
             exit('Error on importing configurations!')
 
+
         # Init bot
         print('Initializing bot...', flush=True)
         self.bot = commands.Bot(
@@ -76,6 +77,9 @@ class apodBot:  # TODO Block args from passing mentions
         Schedules tasks
         """
         print('Scheduling tasks...')
+        if not self.config['ASTRONOMY']['announcement_time']:
+            print('No Astropix announcement time set! No schedules started...')
+            return
         t = self.config['ASTRONOMY']['announcement_time'].split(':')
         self.sched.add_job(func=Astronomy.announce,
                            args=[self.bot],
@@ -103,6 +107,9 @@ class apodBot:  # TODO Block args from passing mentions
         Creates a connection to Discord and starts bot.
         """
         print('Starting bot...', flush=True)
+        if not self.config['CLIENT']['token']:
+            exit('Client token missing!')
+
         self.bot.run(self.config['CLIENT']['token'], bot=True, reconnect=True)
 
 
